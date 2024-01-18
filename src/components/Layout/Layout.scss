@@ -1,0 +1,46 @@
+.ant-layout-header {
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    background-color: #1c83a5;
+
+    .logo {
+        display: flex;
+
+        img {
+            width: 48px;
+            min-width: 48px;
+            height: 48px;
+            border-radius: 6px;
+            margin-inline-end: 24px;
+        }
+    }
+
+    .ant-menu-overflow {
+        background-color: #1c83a5;
+    }
+
+    .ant-menu-dark.ant-menu-horizontal {
+        .ant-menu-item-selected,
+        .ant-menu-submenu-selected {
+            background-color: #be9b4c;
+        }
+    }
+}
+
+.ant-menu-dark.ant-menu-submenu-popup>.ant-menu{
+    background-color: #1c83a5;
+    
+    .ant-menu-item-selected{
+        background-color: #be9b4c;
+    }
+}
+
+.ant-menu-light .ant-menu-item-selected{
+    background-color: #1c83a5;
+    color: white;
+}
+
+.ant-menu-light .ant-menu-submenu-selected >.ant-menu-submenu-title {
+    color: #1c83a5;;
+}
