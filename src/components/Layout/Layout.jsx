@@ -1,132 +1,152 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { 
-  HomeOutlined, 
-  AppstoreOutlined, 
-  SendOutlined, 
-  UserOutlined,
-  IdcardOutlined,
-  GithubOutlined,
-  LinkedinOutlined,
-  ProjectOutlined,
-  PaperClipOutlined,
-  ScheduleOutlined,
-  ToolOutlined,
-  ClockCircleFilled
+//   HomeOutlined, 
+//   AppstoreOutlined, 
+//   SendOutlined, 
+//   UserOutlined,
+//   IdcardOutlined,
+//   GithubOutlined,
+//   LinkedinOutlined,
+//   ProjectOutlined,
+//   PaperClipOutlined,
+//   ScheduleOutlined,
+//   ToolOutlined,
+//   ClockCircleFilled
+  UnorderedListOutlined,
+  CloseOutlined,
 } from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
-import { Outlet } from 'react-router-dom'
+import { Breadcrumb, Layout, Menu, theme, Button } from 'antd';
+import { Outlet, useNavigate } from 'react-router-dom'
 import Logo from '../../assets/images/logo-with-bgcolor.png'
 import './Layout.scss'
 
-const { Header, Sider } = Layout;
-const mainMenuItems = [
-  {
-    label: 'Home',
-    icon: HomeOutlined,
-    subItems: []
-  },
-  {
-    label: 'About Me',
-    icon: IdcardOutlined,
-    to: '/about',
-    subItems: [
-      {
-        label: 'Resume',
-        icon: UserOutlined,
-        options: [],
-      },
-      {
-        label: 'Github',
-        icon: GithubOutlined,
-        options: []
-      },
-      {
-        label: 'Linkedin',
-        icon: LinkedinOutlined,
-        options: []
-      }
-    ]
-  },
-  {
-    label: 'Project Management',
-    icon: ProjectOutlined,
-    to: '/project-management',
-    subItems: [
-      {
-        label: 'Tickets',
-        icon: PaperClipOutlined,
-        options: [],
-      },
-      {
-        label: 'Scheduler',
-        icon: ScheduleOutlined,
-        options: []
-      }
-    ]
-  },
-  {
-    label: 'Games',
-    icon: AppstoreOutlined,
-    subItems: [
-      {
-        label: 'Game 1',
-        icon: '',
-        options: []
-      },
-      {
-        label: 'Game 2',
-        icon: '',
-        options: []
-      }
-    ]
-  },
-  {
-    label: 'Utility',
-    icon: ToolOutlined,
-    subItems: [
-      {
-        label: 'Timer',
-        icon: ClockCircleFilled,
-        options: []
-      }
-    ]
-  },
-  {
-    label: 'Contact',
-    icon: SendOutlined,
-    subItems: [],
-    target: '/contact'
-  }
-]
-
-const mainMenu = mainMenuItems.map((item, index) => ({
-  index,
-  label: `${item.label}`,
-}));
-
-const responsiveSubItems = mainMenuItems.map((item, index) => {
-  const key = String(index + 1);
-  const subItem = {
-    key: `sub${key}`,
-    icon: React.createElement(item.icon),
-    label: `${item.label}`
-  };
-
-  if(item.subItems.length > 0){
-    subItem.children = item.subItems.map((sub, j) => {
-      const subKey = String(j + 1);
-      return {
-        key: `sub${key}.${subKey}`,
-        label: `${sub.label}`,
-      };
-    })
-  }
-  return subItem
-});
-
 const App = () => {
+  const {
+    token: { colorBgContainer, borderRadiusLG },
+  } = theme.useToken();
+
+  const windowUrl = window.location.pathname; // => contact
+  // const windowFullUrl = window.location.ref; // => http://localhost:5173/contact
+
+  useEffect(() => {
+    console.log(windowUrl)
+  });
+
+  const navigate = useNavigate();
+  const { Header, Sider } = Layout;
+  const [current, setCurrent] = useState(windowUrl);
+
+  const mainMenuItems = [
+    {
+      label: 'Home',
+      key: '/',
+      icon: '',
+      subItems: []
+    },
+    {
+      label: 'About Me',
+      key: '/about',
+      icon: '',
+      subItems: [
+        {
+          label: 'Resume',
+          key: '/about/resume',
+          icon: '',
+          options: [],
+        },
+        {
+          label: 'Github',
+          key: '/about/github',
+          icon: '',
+          options: []
+        },
+        {
+          label: 'Linkedin',
+          key: '/about/linkedin',
+          icon: '',
+          options: []
+        }
+      ]
+    },
+    {
+      label: 'Project Management',
+      key: '/project-management',
+      icon: '',
+      subItems: [
+        {
+          label: 'Tickets',
+          key: '/project-management/tickets',
+          icon: '',
+          options: [],
+        },
+        {
+          label: 'Scheduler',
+          key: '/project-management/scheduler',
+          icon: '',
+          options: []
+        }
+      ]
+    },
+    {
+      label: 'Games',
+      key: '/games',
+      icon: '',
+      subItems: [
+        {
+          label: 'Game 1',
+          key: '/games/game-one',
+          icon: '',
+          options: []
+        },
+        {
+          label: 'Game 2',
+          key: '/games/game-two',
+          icon: '',
+          options: []
+        }
+      ]
+    },
+    {
+      label: 'Utility',
+      key: '/utility',
+      icon: '',
+      subItems: [
+        {
+          label: 'Timer',
+          key: '/utility/timer',
+          icon: '',
+          options: []
+        }
+      ]
+    },
+    {
+      label: 'Contact',
+      key: '/contact',
+      icon: '',
+      subItems: []
+    }
+  ]
+
+  const responsiveSubItems = mainMenuItems.map((item) => {
+    const subItem = {
+      key: item.key,
+      label: `${item.label}`
+    };
+
+    if(item.subItems.length > 0){
+      subItem.children = item.subItems.map((sub) => {
+        return {
+          key: sub.key,
+          label: `${sub.label}`,
+        };
+      })
+    }
+    return subItem
+  });
+
   const [openKeys, setOpenKeys] = useState(['sub1']);
   const onOpenChange = (keys) => {
+    console.log(openKeys)
     const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
     if (latestOpenKey && responsiveSubItems.map(i => i.key).indexOf(latestOpenKey) === -1) {
       setOpenKeys(keys);
@@ -135,46 +155,79 @@ const App = () => {
     }
   };
 
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
-
   const menuHandleOk = (e) => {
-    console.log(e.key);
-    
     let target = null;
   
     for (let index = 0; index < mainMenuItems.length; index++) {
       const item = mainMenuItems[index];
-      const key = `sub${String(index + 1)}`;
+      const key = item.key;
       if(key === e.key) target = item;
   
       for (let j = 0; j < item.subItems.length; j++) {
         const subItem = item.subItems[j];
-        const subKey = `${key}.${String(j + 1)}`;
+        const subKey = subItem.key;
         if(subKey === e.key) target = subItem;
       }
     }
   
-    console.log('menuItem', target);
+    if (target) {
+      navigate(target.key, { replace: true });
+    }
+
+    setCurrent(() => target.key);
   }
+
+  const [collapsed, setCollapsed] = useState(false);
+  const [showVerticalNav, setShowVerticalNav] = useState(false);
+  
+  const toggleCollapsed = () => {
+    setCollapsed((collapsed) => !collapsed);
+    setShowVerticalNav((showVerticalNav) => !showVerticalNav)
+  };
+
+ 
+
   return (
     <Layout>
       <Header>
         <div className='logo'>
           <img src={Logo} alt="Weiss" />
         </div>
-        <Menu
+        <Menu 
+          className='horizontal-main-menu'
           theme="dark"
+          onClick={menuHandleOk} 
+          selectedKeys={[current]} 
           mode="horizontal"
-          defaultSelectedKeys={['1']}
-          items={mainMenu}
+          items={responsiveSubItems} 
           style={{
             flex: 1,
             minWidth: 0,
           }}
-        />
+        />  
+        <Button className='ghost-button' ghost onClick={toggleCollapsed}>
+          {collapsed ? <CloseOutlined /> : <UnorderedListOutlined />}
+        </Button>
       </Header>
+      <section>
+        { showVerticalNav
+          ? <Menu 
+              className='vertical-main-menu'
+              mode="inline"
+              openKeys={openKeys}
+              selectedKeys={[current]} 
+              items={responsiveSubItems} 
+              onOpenChange={onOpenChange}
+              onClick={menuHandleOk} 
+              style={{
+                flex: 1,
+                minWidth: 0,
+              }}
+          /> 
+          : null
+        }
+        
+      </section>
       <Layout>
         <Sider
           width={200}
@@ -185,15 +238,14 @@ const App = () => {
           <Menu
             mode="inline"
             openKeys={openKeys}
+            selectedKeys={[current]} 
+            items={responsiveSubItems}
             onOpenChange={onOpenChange}
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
+            onClick={menuHandleOk}
             style={{
               height: '100%',
               borderRight: 0,
             }}
-            items={responsiveSubItems}
-            onClick={menuHandleOk}
           />
         </Sider>
         <Layout
