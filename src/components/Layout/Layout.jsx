@@ -266,14 +266,12 @@ const App = () => {
           </Breadcrumb>
           <div
             style={{
-              padding: 24,
               margin: 0,
-              minHeight: 280,
               background: colorBgContainer,
               borderRadius: borderRadiusLG,
             }}
           >
-            <Outlet/>
+            <Outlet style={{ height: '-webkit-calc(100% - 64px)' }} />
           </div>
         </Layout>
       </Layout>
