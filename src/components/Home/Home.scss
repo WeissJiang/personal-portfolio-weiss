@@ -1,0 +1,90 @@
+@import '../../App.scss';
+
+@mixin keyframes($animation-name) {
+    @-webkit-keyframes #{$animation-name} {
+      @content;
+    }
+    @keyframes #{$animation-name} {
+      @content;
+    }
+}
+
+@include keyframes(fade) {
+    0% {
+      filter: hue-rotate(0deg);
+    }
+    100% {
+        filter: hue-rotate(360deg);
+    }
+  }
+
+@mixin animation($str) {
+    -webkit-animation: #{$str};
+    animation: #{$str};
+}
+  
+.home-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    
+
+    .cloud-rain-container {
+        
+        display: flex;
+        position: relative;
+        height: 400px;
+        width: 100%;
+        justify-content: center;
+        background-color: var(--cloud-black);
+        
+        .cloud {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            z-index: 1;
+            filter: drop-shadow(0 0 35px var(--cloud-blue));
+            @include animation('fade 5s linear infinite');
+
+            .text{
+                top: 220px;
+                font-size: 32px;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                white-space: nowrap;
+                color: var(--cloud-black);
+                z-index: 2;
+                background: var(--cloud-blue);
+                padding: 0 40px;
+                border-radius: 10px;
+            }
+
+            .text::before{
+                content: '';
+                position: absolute;
+                top: -95px;
+                left: 50%;
+                width: 320px;
+                height: 80px;
+                background-color: var(--cloud-blue);
+                transform: translateX(-50%);
+                border-radius: 100px;
+            }
+
+            .text::after{
+                content: '';
+                position: absolute;
+                top: -135px;
+                left: 50%;
+                width: 120px;
+                height: 100px;
+                background-color: var(--cloud-blue);
+                border-radius: 50%;
+                box-shadow: -100px -30px 0 30px var(--cloud-blue);
+            }
+        }
+    }
+}
+
