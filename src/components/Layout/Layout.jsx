@@ -29,7 +29,7 @@ const App = () => {
   // const windowFullUrl = window.location.ref; // => http://localhost:5173/contact
 
   useEffect(() => {
-    console.log(windowUrl)
+    console.log('url: ', windowUrl)
   });
 
   const navigate = useNavigate();
