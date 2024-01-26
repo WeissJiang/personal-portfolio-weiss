@@ -1,5 +1,11 @@
 @import '../../App.scss';
 
+:root {
+    --rain-drop-left: Math.floor(Math.random() * 300) + 'px';
+    --rain-drop-size: 0.5 + Math.random() * 1.5 + 'em';
+    --cloud-height: calc(100vh - 300px);
+}
+
 @mixin keyframes($animation-name) {
     @-webkit-keyframes #{$animation-name} {
       @content;
@@ -9,43 +15,64 @@
     }
 }
 
-@include keyframes(fade) {
+@mixin animation($str) {
+    -webkit-animation: #{$str};
+    animation: #{$str};
+}
+
+@include keyframes(cloudColorChange) {
     0% {
       filter: hue-rotate(0deg);
     }
     100% {
         filter: hue-rotate(360deg);
     }
-  }
-
-@mixin animation($str) {
-    -webkit-animation: #{$str};
-    animation: #{$str};
 }
-  
+
+@include keyframes(cloudRainDrop) {
+    0% {
+        transform: translateY(0) scaleY(0);
+        transform-origin: top;
+    }
+    10% {
+        transform: translateY(0) scaleY(0.25);
+        transform-origin: top;
+    }
+    20% {
+        transform: translateY(0) scaleY(1);
+    }
+    70% {
+        transform: translateY(--cloud-height) scaleY(1);
+        transform-origin: bottom;
+    }
+    80% {
+        transform: translateY(--cloud-height) scaleY(1);
+        transform-origin: bottom;
+    }
+    100% {
+        transform: translateY(--cloud-height) scaleY(0);
+        transform-origin: bottom;
+        text-shadow: -180px 0 0 var(--cloud-blue), 180px 0 0 var(--cloud-blue);
+    }
+}
+
 .home-page {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    
 
     .cloud-rain-container {
-        
         display: flex;
         position: relative;
-        height: 400px;
         width: 100%;
         justify-content: center;
-        background-color: var(--cloud-black);
         
         .cloud {
             position: relative;
-            width: 300px;
-            height: 300px;
+            width: 200px;
             z-index: 1;
             filter: drop-shadow(0 0 35px var(--cloud-blue));
-            @include animation('fade 5s linear infinite');
+            @include animation('cloudColorChange 5s linear infinite');
 
             .text{
                 top: 220px;
@@ -83,6 +110,22 @@
                 background-color: var(--cloud-blue);
                 border-radius: 50%;
                 box-shadow: -100px -30px 0 30px var(--cloud-blue);
+            }
+
+            .drop{
+                text-overflow: clip;
+                white-space: nowrap;
+                width: 200px;
+                position: absolute;
+                top: 300px;
+                height: 20px;
+                line-height: 20px;
+                color: var(--cloud-blue);
+                transform-origin: bottom;
+                @include animation('cloudRainDrop 2s linear infinite');
+
+                // left: var(--rain-drop-left);
+                // font-size: var(--rain-drop-size);
             }
         }
     }
