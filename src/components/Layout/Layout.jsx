@@ -120,6 +120,12 @@ const App = () => {
       ]
     },
     {
+      label: 'Pinata',
+      key: '/pinata',
+      icon: '',
+      subItems: []
+    },
+    {
       label: 'Contact',
       key: '/contact',
       icon: '',
@@ -230,6 +236,7 @@ const App = () => {
       </section>
       <Layout>
         <Sider
+          collapsible
           width={200}
           style={{
             background: colorBgContainer,
