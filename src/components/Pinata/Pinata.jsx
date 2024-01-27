@@ -6,12 +6,19 @@ import './Pinata.scss';
 export default function Pinata(){
     const [mode, setMode] = useState('top');
 
+    const onChange = (key) => {
+        console.log(key);
+        setForceRefreshCloud(() => key == 'cloud-rain' ? true : false)
+    };
+
+    const [forceRefreshCloud, setForceRefreshCloud] = useState(false)
+
     const pinataTabs = [
         {
             label: 'Cloud Rain',
             key: 'cloud-rain',
             children: (
-                <CloudRain />
+                <CloudRain forceRefresh={forceRefreshCloud} />
             )
         },
         {
@@ -29,14 +36,12 @@ export default function Pinata(){
                 defaultValue="top"
                 onChange={(value) => setMode(value)}
                 options={['top', 'left']}
+                block
             />
             <Tabs
                 tabPosition={mode}
                 items={pinataTabs}
-                indicator={{
-                    size: (origin) => origin - 20,
-                    align: mode,
-                }}
+                onChange={onChange}
             />
         </div>
     )

@@ -4,7 +4,21 @@
     padding: 14px;
     height: calc(100vh - 140px);
 
-    .ant-space {
-        margin: 20px;
+    .ant-segmented {
+        width: 200px;
+    }
+
+    .ant-tabs{
+        .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+            color: var(--cloud-blue);
+        }
+
+        .ant-tabs-tab:hover {
+            color: var(--cloud-blue)
+        }
+
+        .ant-tabs-ink-bar {
+            background: var(--cloud-blue);
+        }
     }
 }
