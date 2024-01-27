@@ -9,8 +9,8 @@ const rainText = () => {
 }
 
 const rain = () => {
-    let cloud = document.querySelector('.cloud');
-    let rainDrop = document.createElement('div');
+    const cloud = document.querySelector('.cloud');
+    const rainDrop = document.createElement('div');
     rainDrop.classList.add('drop');
     cloud.appendChild(rainDrop);
 
@@ -20,22 +20,24 @@ const rain = () => {
 }
 
 const removeRainDrops = () => {
+    console.log('remove all the rain drops');
     const dropNodes = document.querySelectorAll(".drop");
     const dropDivs = [...dropNodes];
     for (let i = 0; i < dropDivs.length; i++) {
         if(i == 100) break
         const endDrop = dropDivs[i];
         const parent = endDrop.parentNode;
-        console.log(i)
         parent.removeChild(endDrop);
     }
 }
 
 export default function CloudRain() {
     useEffect(() => {
+        console.log('render cloud rain');
+        removeRainDrops();
         const test = setInterval(() => {
             rain()
-        }, 40)
+        }, 50)
         setTimeout(function(){
             clearInterval( test );
         }, 2000);
