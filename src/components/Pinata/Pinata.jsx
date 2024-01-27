@@ -1,13 +1,10 @@
 import { useState } from 'react';
-import { Radio, Space, Tabs } from 'antd';
+import { Segmented, Tabs } from 'antd';
 import CloudRain from './CloudRain';
 import './Pinata.scss';
 
 export default function Pinata(){
-    const [tabPosition, setTabPosition] = useState('left');
-    const changeTabPosition = (e) => {
-        setTabPosition(() => e.target.value);
-    };
+    const [mode, setMode] = useState('top');
 
     const pinataTabs = [
         {
@@ -28,17 +25,18 @@ export default function Pinata(){
 
     return (
         <div className='pinata-tabs'>
-            <Space>
-                <Radio.Group value={tabPosition} onChange={changeTabPosition}>
-                <Radio.Button value="top">top</Radio.Button>
-                <Radio.Button value="bottom">bottom</Radio.Button>
-                <Radio.Button value="left">left</Radio.Button>
-                <Radio.Button value="right">right</Radio.Button>
-                </Radio.Group>
-            </Space>
+            <Segmented
+                defaultValue="top"
+                onChange={(value) => setMode(value)}
+                options={['top', 'left']}
+            />
             <Tabs
-                tabPosition={tabPosition}
+                tabPosition={mode}
                 items={pinataTabs}
+                indicator={{
+                    size: (origin) => origin - 20,
+                    align: mode,
+                }}
             />
         </div>
     )
