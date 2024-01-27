@@ -113,10 +113,13 @@
             color: var(--cloud-blue);
             transform-origin: bottom;
             @include animation('cloudRainDrop 2s linear infinite');
-
-            // left: var(--rain-drop-left);
-            // font-size: var(--rain-drop-size);
         }
+    }
+}
+
+@media (max-width: 680px) {
+    .cloud-rain-container {
+        transform: scale(0.5);
     }
 }
 
