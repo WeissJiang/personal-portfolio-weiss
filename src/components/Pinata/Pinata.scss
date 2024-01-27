@@ -1,3 +1,10 @@
+@import '../../App.scss';
+
 .pinata-tabs {
-    padding: 10px;
+    padding: 14px;
+    height: calc(100vh - 140px);
+
+    .ant-space {
+        margin: 20px;
+    }
 }

@@ -191,8 +191,6 @@ const App = () => {
     setShowVerticalNav((showVerticalNav) => !showVerticalNav)
   };
 
- 
-
   return (
     <Layout>
       <Header>

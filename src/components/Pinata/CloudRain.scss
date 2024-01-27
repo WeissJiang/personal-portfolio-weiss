@@ -36,15 +36,15 @@
         transform: translateY(0) scaleY(1);
     }
     70% {
-        transform: translateY(calc(100vh - 540px)) scaleY(1);
+        transform: translateY(calc(100vh - 640px)) scaleY(1);
         transform-origin: bottom;
     }
     80% {
-        transform: translateY(calc(100vh - 540px)) scaleY(1);
+        transform: translateY(calc(100vh - 640px)) scaleY(1);
         transform-origin: bottom;
     }
     100% {
-        transform: translateY(calc(100vh - 540px)) scaleY(0);
+        transform: translateY(calc(100vh - 640px)) scaleY(0);
         transform-origin: bottom;
         text-shadow: -180px 0 2px var(--cloud-blue), 180px 0 2px var(--cloud-blue);
     }
