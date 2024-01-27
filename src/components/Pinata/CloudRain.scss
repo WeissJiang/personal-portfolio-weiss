@@ -50,78 +50,72 @@
     }
 }
 
-.module-page {
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
-
-    .cloud-rain-container {
-        display: flex;
+.cloud-rain-container {
+    display: flex;
+    position: relative;
+    width: 100%;
+    justify-content: center;
+    
+    .cloud {
         position: relative;
-        width: 100%;
-        justify-content: center;
-        
-        .cloud {
-            position: relative;
+        width: 200px;
+        z-index: 1;
+        filter: drop-shadow(0 0 35px var(--cloud-blue));
+        @include animation('cloudColorChange 5s linear infinite');
+
+        .text{
+            top: 220px;
+            font-size: 32px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            color: var(--cloud-white);
+            z-index: 2;
+            background: var(--cloud-blue);
+            padding: 0 40px;
+            border-radius: 10px;
+            text-shadow: 80px -240px 4px var(--cloud-blue);
+        }
+
+        .text::before{
+            content: '';
+            position: absolute;
+            top: -95px;
+            left: 50%;
+            width: 320px;
+            height: 80px;
+            background-color: var(--cloud-blue);
+            transform: translateX(-50%);
+            border-radius: 100px;
+        }
+
+        .text::after{
+            content: '';
+            position: absolute;
+            top: -135px;
+            left: 50%;
+            width: 120px;
+            height: 100px;
+            background-color: var(--cloud-blue);
+            border-radius: 50%;
+            box-shadow: -100px -30px 0 30px var(--cloud-blue);
+        }
+
+        .drop{
+            text-overflow: clip;
+            white-space: nowrap;
             width: 200px;
-            z-index: 1;
-            filter: drop-shadow(0 0 35px var(--cloud-blue));
-            @include animation('cloudColorChange 5s linear infinite');
+            position: absolute;
+            top: 310px;
+            height: 20px;
+            line-height: 20px;
+            color: var(--cloud-blue);
+            transform-origin: bottom;
+            @include animation('cloudRainDrop 2s linear infinite');
 
-            .text{
-                top: 220px;
-                font-size: 32px;
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
-                white-space: nowrap;
-                color: var(--cloud-white);
-                z-index: 2;
-                background: var(--cloud-blue);
-                padding: 0 40px;
-                border-radius: 10px;
-                text-shadow: 80px -240px 4px var(--cloud-blue);
-            }
-
-            .text::before{
-                content: '';
-                position: absolute;
-                top: -95px;
-                left: 50%;
-                width: 320px;
-                height: 80px;
-                background-color: var(--cloud-blue);
-                transform: translateX(-50%);
-                border-radius: 100px;
-            }
-
-            .text::after{
-                content: '';
-                position: absolute;
-                top: -135px;
-                left: 50%;
-                width: 120px;
-                height: 100px;
-                background-color: var(--cloud-blue);
-                border-radius: 50%;
-                box-shadow: -100px -30px 0 30px var(--cloud-blue);
-            }
-
-            .drop{
-                text-overflow: clip;
-                white-space: nowrap;
-                width: 200px;
-                position: absolute;
-                top: 310px;
-                height: 20px;
-                line-height: 20px;
-                color: var(--cloud-blue);
-                transform-origin: bottom;
-                @include animation('cloudRainDrop 2s linear infinite');
-
-                // left: var(--rain-drop-left);
-                // font-size: var(--rain-drop-size);
-            }
+            // left: var(--rain-drop-left);
+            // font-size: var(--rain-drop-size);
         }
     }
 }

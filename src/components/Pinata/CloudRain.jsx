@@ -20,7 +20,6 @@ const rain = () => {
 }
 
 const removeRainDrops = () => {
-    console.log('remove all the rain drops');
     const dropNodes = document.querySelectorAll(".drop");
     const dropDivs = [...dropNodes];
     for (let i = 0; i < dropDivs.length; i++) {
@@ -31,9 +30,9 @@ const removeRainDrops = () => {
     }
 }
 
-export default function CloudRain() {
+export default function CloudRain({ forceRefresh }) {
     useEffect(() => {
-        console.log('render cloud rain');
+        console.log(`force to refresh cloud rain component? ${forceRefresh}`)
         removeRainDrops();
         const test = setInterval(() => {
             rain()
@@ -44,11 +43,9 @@ export default function CloudRain() {
     })
 
     return (
-        <div className="module-page">
-            <div className="cloud-rain-container">
-                <div className="cloud">
-                    <p className='text'>Cloud Rain</p>
-                </div>
+        <div className="cloud-rain-container">
+            <div className="cloud">
+                <p className='text'>Cloud Rain</p>
             </div>
         </div>
     )
